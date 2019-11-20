@@ -1,11 +1,17 @@
 import React from 'react';
-import Rating from './containers/Rating';
+import { Route, Switch } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Home from './screens/Home';
+import Detail from './screens/Detail';
 
 const App: React.FC = () => {
   return (
-    <div className="App" >
-      <Rating />
-    </div>
+    <Router>
+      <div className="App main-wrapper" >
+        <Route path="/" component={Home} />
+        <Route path="/:bookId" component={Detail} />
+      </div>
+    </Router>
   );
 };
 

@@ -1,10 +1,10 @@
 import React from 'react'
 
-interface Props {
-  
+interface IProps {
+    
 }
 
-const Presenter: React.FC<Props> = () => {
+const Presenter: React.FC<IProps> = () => {
   return (
     <div>
       {/* 메인 */}
@@ -30,4 +30,4 @@ const Presenter: React.FC<Props> = () => {
   )
 }
 
-export default Presenter
+export default Presenter;

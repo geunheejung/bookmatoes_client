@@ -1,6 +1,7 @@
-import Container from "./Container";
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import Container from './Container';
 
-export default Container;
+export default withRouter<RouteComponentProps, any>(Container);
 
 export interface IBookDocument {
   /* 제목 및 소개 */
