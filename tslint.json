@@ -10,11 +10,8 @@
         "ordered-imports": false,
         "no-console": false,
         "trailing-comma": false,
-        "variable-name": {
-            "options": [
-                "allow-trailing-underscore"
-            ]
-        }
+        "curly": false,
+        "no-trailing-whitespace": false
     },
     "rules": {
         "quotemark": [true, "single", "jsx-double"],
@@ -23,7 +20,8 @@
         "ordered-imports": false,
         "no-console": false,
         "trailing-comma": false,
-        "variable-name": ["allow-leading-underscore"]
+        "curly": false,
+        "no-trailing-whitespace": false
     },
     "rulesDirectory": []
 }
