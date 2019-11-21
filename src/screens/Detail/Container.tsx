@@ -20,7 +20,7 @@ class Container extends Component<IProps, IState> {
     */
   }
 
-  render() {
+  render() {    
     return (
       <Presenter />
     );
