@@ -1,0 +1,68 @@
+.detail-wrapper {
+  display: grid; 
+  grid-template-columns: auto 1fr;
+  padding: 40px 240px 0 240px;
+}
+
+.detail-wrapper .thumbnail-wrapper {
+  margin: 0 30px 0 0;
+}
+
+.detail-wrapper .info-wrapper {
+  
+}
+.detail-wrapper .info-wrapper .book-title { 
+  margin: 0 0 10px 0;
+  font-size: 24px;    
+  color: #3a60df;  
+}
+
+.detail-wrapper .info-wrapper .book-source {
+  margin: 0 0 40px 0;
+  font-size: 12px;
+  color: #777;    
+}
+
+.detail-wrapper .info-wrapper .book-content {  
+  line-height: 1.4;
+  font-size: 12px;
+  color: #666;
+}
+
+.detail-wrapper .info-wrapper .book-rating {  
+  position: relative;
+  display: flex;  
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-wrapper .info-wrapper .book-rating .show-rating-btn {  
+  position: absolute;
+  top: 80px;
+  width: 60%;      
+  border-radius: 7px;    
+}
+
+.detail-wrapper .info-wrapper .book-rating .show-rating-btn:hover {
+  width: 70%;
+  padding: 14px;
+  top: 70px;
+}
+
+.common-button {
+  transition: .2s;
+  padding: 11px 14px;
+  color: #222;  
+}
+
+.common-button.primry {  
+  border: 2px solid #5383e8;
+  font-size: 16px;  
+  font-weight: 600;
+}
+
+.common-button.primry:hover {
+  background: #5383e8;
+  border: 2px solid #fff;
+  color: #fff;  
+}
