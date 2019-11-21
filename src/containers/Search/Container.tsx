@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _debounce from 'lodash/debounce';
 import { RouteComponentProps } from 'react-router-dom';
 import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 import {  IBookSearchResponse, TBookDocumentList, IBookDocument } from './';
@@ -78,7 +79,7 @@ class Container extends Component<IProps, IState> {
     keyword: '',
     isShowPreview: true,
   };
-
+  
   fetchBookSearch = async () => {
     const { keyword } = this.state;
 
@@ -89,7 +90,9 @@ class Container extends Component<IProps, IState> {
 
     const { data: { documents } } = await searchBook(keyword);
     this.setState({ bookDocuments: documents });
-  }
+  }  
+
+  _fetchBookSearch = _debounce(this.fetchBookSearch, 300);
 
   changeKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
     /*
@@ -97,7 +100,8 @@ class Container extends Component<IProps, IState> {
     2. 검색 api 요청.
     */
    const { target: { value }  } = e;
-   this.setState({ keyword: value }, this.fetchBookSearch);
+   this.setState({ keyword: value }, this._fetchBookSearch);
+
   }
 
   focusInput = () => {
