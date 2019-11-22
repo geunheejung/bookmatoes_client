@@ -48,21 +48,3 @@
   padding: 14px;
   top: 70px;
 }
-
-.common-button {
-  transition: .2s;
-  padding: 11px 14px;
-  color: #222;  
-}
-
-.common-button.primry {  
-  border: 2px solid #5383e8;
-  font-size: 16px;  
-  font-weight: 600;
-}
-
-.common-button.primry:hover {
-  background: #5383e8;
-  border: 2px solid #fff;
-  color: #fff;  
-}

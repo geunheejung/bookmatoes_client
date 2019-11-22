@@ -1,18 +1,10 @@
 import React from 'react';
+import { Button } from '../../components/button';
 import './styles.css';
 
 interface IProps {
     
 }
-
-const Button: React.SFC<{ styles?: {}, className: string }> = ({ styles, className }) => (
-  <button  
-    className={`common-button primry ${className}`}
-    style={styles}
-  >
-    평점 보기
-  </button>  
-);
 
 const Presenter: React.FC<IProps> = () => {
   return (    
@@ -33,7 +25,7 @@ const Presenter: React.FC<IProps> = () => {
         <div className="book-rating">
           <Button className="show-rating-btn">
             평점 보기
-          </Button>  
+          </Button>
         </div>        
       </div>      
     </div>
