@@ -1,31 +1,56 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
+import { IBookDocument } from '../../containers/Search';
+import { Button } from '../../components/button';
+import './styles.css';
 
 interface IProps {
-    
+  bookDocument: IBookDocument;
 }
 
-const Presenter: React.FC<IProps> = () => {
-  return (
-    <div>
-      {/* 메인 */}
-      <div>
+const spreadArrToStr = (str: string | string[]) => {
+  if (!Array.isArray(str)) return str;
+  return str.join(', ').trimEnd();
+};
+
+const Presenter: React.FC<IProps> = ({
+  bookDocument: {     
+    thumbnail,
+    title,
+    authors,
+    translators,
+    publisher,
+    datetime,
+    contents,    
+  } 
+}) => {
+  return (    
+    <div className="detail-wrapper">      
+      <div className="thumbnail-wrapper">
         {/* 썸네일 */}
-        <img src="" alt=""/>
+        <img 
+          src={thumbnail}           
+          alt="book_thumbnail"
+        />
       </div>
       {/* 서브 */}
-      <div>
-        {/* 책 정보 */}
-        <p>
-
+      <div className="info-wrapper">
+        <h1 className="book-title">{title}</h1>
+        <p className="book-source"> 
+        <span>{spreadArrToStr(authors)}</span>
+        <span>{spreadArrToStr(translators)}</span>
+        <span>{publisher}</span>
+        <span>{moment(datetime).format('YYYY년 MM일 DD월')} 출간</span>
         </p>
-        {/* 평점 리스트 */}
-        <ul>
-          <li>
-            <span>출판사</span>
-            <span>평점</span>
-          </li>
-        </ul>
-      </div>
+        <p className="book-content">
+          {contents}
+        </p>
+        <div className="book-rating">
+          <Button className="show-rating-btn">
+            평점 보기
+          </Button>
+        </div>        
+      </div>      
     </div>
   )
 }
