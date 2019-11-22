@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IBookDocument } from '../../containers/Search';
+import { IBookDocument } from '../../services/api/kakao';
 import { RouteComponentProps } from 'react-router-dom';
 import Presenter from './Presenter';
 

@@ -1,67 +1,12 @@
 import React, { Component } from 'react';
 import _debounce from 'lodash/debounce';
 import { RouteComponentProps } from 'react-router-dom';
-import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
-import {  IBookSearchResponse, TBookDocumentList, IBookDocument } from './';
+import {  
+  searchBook,
+  TBookDocumentList, 
+  IBookDocument 
+} from '../../services/api/kakao';
 import Presenter from './Presenter';
-
-enum METHOD {
-  GET = 'get',
-  DELETE = 'delete',
-  HEAD = 'head',
-  OPTIONS = 'options',
-  POST = 'post',
-  PUT = 'put',
-  PATCH = 'patch',
-}
-
-enum KAKAO_API_PATH {
-  Book = 'search/book'
-}
-
-interface ISearchBookPayload {
-  query: string;
-}
-
-const fetchKakaoAPI = async (
-  path: KAKAO_API_PATH,
-  method: Method,
-  payload?: ISearchBookPayload
-) => {
-  const API_KEY = 'df02aa681731a2f1ccdf67cc5c61ea02';
-  const AXIOS_CONFIG: AxiosRequestConfig = {
-    headers: {
-      Authorization: `KakaoAK ${API_KEY}`,
-    },
-  };
-
-  const axiosInstance = axios.create(AXIOS_CONFIG);
-  const requestConfig: AxiosRequestConfig = {
-    url: `https://dapi.kakao.com/v3/${path}`,
-    method,
-  };
-
-  if (!!payload) {
-    requestConfig[method === METHOD.GET ? 'params' : 'data'] = payload;
-  }
-
-  return await axiosInstance.request(requestConfig);
-};
-
-const searchBook = async (keyword: string) => {
-  if (!keyword) throw false;
-
-  try {
-    const res: AxiosResponse<IBookSearchResponse> = await fetchKakaoAPI(
-      KAKAO_API_PATH.Book,
-      METHOD.GET,
-      { query: keyword }
-    );
-    return res;
-  } catch(e) {    
-    throw e;
-  }
-};
 
 interface IProps extends RouteComponentProps {
   

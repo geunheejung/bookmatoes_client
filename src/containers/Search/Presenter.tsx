@@ -1,5 +1,5 @@
 import React from 'react';
-import { TBookDocumentList, IBookDocument } from './';
+import { TBookDocumentList, IBookDocument } from '../../services/api/kakao';
 import { SadTear } from '../../components/icons';
 import './styles.css';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { IBookDocument } from '../../containers/Search';
+import { IBookDocument } from '../../services/api/kakao';
 import { Button } from '../../components/button';
 import './styles.css';
 
