@@ -114,7 +114,10 @@ class Container extends Component<IProps, IState> {
 
   clickItem = (bookDocument: IBookDocument) => {
     this.setState({ isShowPreview: false }, () => {
-      this.props.history.push(`/${bookDocument.title}`);
+      this.props.history.push({
+        pathname: `/${bookDocument.title}`,
+        state: { bookDocument }
+      });
     });
   };
 

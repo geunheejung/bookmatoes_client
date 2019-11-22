@@ -5,6 +5,7 @@
 }
 
 .home-screen .search-wrapper {
+  position: relative;
   width: 620px;
   margin: 160px 0 0 0;
 }
