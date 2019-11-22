@@ -10,7 +10,17 @@ interface IState {
 }
 
 class Container extends Component<IProps, IState> {
-  state = {}
+  constructor(props: IProps) {
+    super(props);
+    const { 
+      location: { state },
+      history
+    } = props;
+
+    if (!state) history.replace('/');
+  
+    this.state = {};
+  }
 
   componentWillMount() {
     /* TODO
@@ -18,6 +28,7 @@ class Container extends Component<IProps, IState> {
     1. 리다이렉트 처리.
     2. 토스트 메세지 처리.
     */
+   
   }
 
   render() {    
