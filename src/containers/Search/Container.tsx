@@ -116,9 +116,7 @@ class Container extends Component<IProps, IState> {
     this.setState({ isShowPreview: false }, () => {
       this.props.history.push({
         pathname: `/${bookDocument.title}`,
-        state: {
-          isValid: true
-        }
+        state: { bookDocument }
       });
     });
   };

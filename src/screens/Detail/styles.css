@@ -23,6 +23,15 @@
   color: #777;    
 }
 
+.detail-wrapper .info-wrapper .book-source > span::after {
+  content: "|";
+  margin: 0 5px;
+}
+
+.detail-wrapper .info-wrapper .book-source > span:nth-last-child(1)::after {
+  content: '';
+}
+
 .detail-wrapper .info-wrapper .book-content {  
   line-height: 1.4;
   font-size: 12px;
