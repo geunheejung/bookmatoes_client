@@ -6,6 +6,7 @@ import './styles.css';
 
 interface IProps {
   bookDocument: IBookDocument;
+  showBookRating: () => void;
 }
 
 const spreadArrToStr = (str: string | string[]) => {
@@ -22,7 +23,8 @@ const Presenter: React.FC<IProps> = ({
     publisher,
     datetime,
     contents,    
-  } 
+  },
+  showBookRating 
 }) => {
   return (    
     <div className="detail-wrapper">      
@@ -46,7 +48,10 @@ const Presenter: React.FC<IProps> = ({
           {contents}
         </p>
         <div className="book-rating">
-          <Button className="show-rating-btn">
+          <Button 
+            className="show-rating-btn"
+            onClick={showBookRating}
+          >
             평점 보기
           </Button>
         </div>        

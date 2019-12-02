@@ -6,6 +6,8 @@ export interface ISearchBookPayload {
   query: string;
 }
 
+export type KakaoRequestParams = ISearchBookPayload;
+
 export interface IBookDocument {
   /* 제목 및 소개 */
   title: string; // 도서 제목

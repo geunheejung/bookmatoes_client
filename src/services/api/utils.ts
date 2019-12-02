@@ -1,75 +1,51 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
-import { KAKAO_API_PATH, ISearchBookPayload } from './kakao';
+import _isString from 'lodash/isString';
+import _isEqual from 'lodash/isEqual';
 import { Method } from './type';
 
-interface IAxiosConfig {
-  headers?: {};
-  authorization?: string;
-  customConfig?: AxiosRequestConfig;
-}
-
-export const initAxios = (config: IAxiosConfig): AxiosInstance => {
-  const {  
-    headers,
-    authorization,
-    customConfig
-  } = config;
-
-  const axiosConfig: AxiosRequestConfig = {
-    headers: {
-      ...headers
-    },
-    ...customConfig
-  };
-
-  if (!!authorization) axiosConfig.headers.authorization = authorization;
-
-  return axios.create(axiosConfig);
-};
-
-interface IFetchParams {
-  url: string;
+interface IParams<T> {
+  endPoint: string;
   method: Method;
-  payload?: {};
+  payload?: T;
 }
 
-const fetchApi = async (
-  params: IFetchParams, 
-  axiosInstance?: AxiosInstance
-) => {
-  const { 
-    url,
-    method,
-    payload,
-  } = params;
+class Fetch {  
+  private initConfig: AxiosRequestConfig;  
+  private axiosIstance: AxiosInstance;      
 
-  const requestConfig: AxiosRequestConfig = {
-    url,
-    method
-  };
-
-  if (!!payload) {
-    const key = method === Method.GET ? 'params' : 'data';
-    requestConfig[key] = payload;
+  constructor(url: string, axiosConfig?: AxiosRequestConfig) {    
+    this.initConfig  = { url, ...axiosConfig };
+    this.axiosIstance = axios.create(this.initConfig);
   }
 
-  if (!axiosInstance) return await axios.request(requestConfig);
-
-  return await axiosInstance.request(requestConfig);
-};
-
-export const fetchKakaoAPI = async (
-  path: KAKAO_API_PATH,
-  method: Method,
-  payload?: ISearchBookPayload
-) => {
-  const API_KEY = 'df02aa681731a2f1ccdf67cc5c61ea02';  
-
-  const axiosInstance = initAxios({
-    authorization: `KakaoAK ${API_KEY}`
-  });
+  public request = async <T>(params: IParams<T>) => {                          
+    const res = await this.axiosIstance.request(this.getConfig(params));    
+    return res;
+  }
   
-  const url = `https://dapi.kakao.com/v3/${path}`;
+  private getConfig = (params: IParams<any>): AxiosRequestConfig => {
+    const { GET, POST } = Method;     
+    const { initConfig: { url } } = this;
+    const { method, endPoint, payload } = params;
+    const axiosRequestConfig: AxiosRequestConfig = {
+      url: `${url}/${endPoint}`,
+      method,
+    };
+    
+    if (!payload) return axiosRequestConfig;
 
-  return await fetchApi({ url, method, payload }, axiosInstance);
-};
+    if (method === GET || method === POST) {    
+      axiosRequestConfig[method === GET ? 'params' : 'data'] = payload;
+    }
+
+    return axiosRequestConfig;
+  };
+}
+
+export const kakaoFetch = new Fetch('https://dapi.kakao.com/v3', {
+  headers: {
+    authorization: `KakaoAK df02aa681731a2f1ccdf67cc5c61ea02` 
+  }
+});
+
+export const bookFeatch = new Fetch(`http://localhost:8080`);

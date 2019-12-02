@@ -7,3 +7,11 @@ export enum Method {
   PUT = 'put',
   PATCH = 'patch',
 }
+
+export enum BookApiEndPoint {
+  SELLER = 'seller',
+}
+
+export interface IBookApiPayload {
+  bookId: string;
+};
