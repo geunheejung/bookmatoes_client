@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
 import { IBookDocument } from '../../services/api/kakao';
 import { RouteComponentProps } from 'react-router-dom';
-import { bookSellers, BookApiEndPoint, Method } from '../../services/api';
+import { bookSellers } from '../../services/api';
 import Presenter from './Presenter';
 
-interface IProps {
-  location: {
-    state: {
-      bookDocument: IBookDocument
-    }
-  }
-}
+interface IProps {  }
 
 interface IState {
-  
+  bookSellerUrlList: string[],
 }
 
-type Props = IProps & RouteComponentProps;
+type Props = IProps & RouteComponentProps<undefined, any, { bookDocument: IBookDocument }>;
 
 class Container extends Component<Props, IState> {
   constructor(props: Props) {
@@ -28,13 +22,16 @@ class Container extends Component<Props, IState> {
 
     if (!state) history.replace('/');    
   
-    this.state = {};
+    this.state = {
+      bookSellerUrlList: [],
+    };
   }  
 
-  showBookRating = async () => {      
-    await bookSellers({
-      bookId: '1467038&q=미움받을+용기%28교보문고+단독+스페셜+에디션%29%28리커버%3AK%29'
-    });
+  showBookRating = async () => {    
+    const { location: { state: { bookDocument: { url } } } } = this.props;
+    const response = await bookSellers({ url });
+
+    this.setState({ bookSellerUrlList: response.data });    
   }
 
   render() {        

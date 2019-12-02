@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
+import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 import _isString from 'lodash/isString';
 import _isEqual from 'lodash/isEqual';
 import { Method } from './type';
@@ -18,8 +18,8 @@ class Fetch {
     this.axiosIstance = axios.create(this.initConfig);
   }
 
-  public request = async <T>(params: IParams<T>) => {                          
-    const res = await this.axiosIstance.request(this.getConfig(params));    
+  public request = async <T, F>(params: IParams<T>) => {                          
+    const res: AxiosResponse<F> = await this.axiosIstance.request(this.getConfig(params));    
     return res;
   }
   

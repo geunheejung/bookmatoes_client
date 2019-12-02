@@ -8,7 +8,7 @@ export const searchBook = async (keyword: string) => {
   if (!keyword) throw false;
 
   try {  
-    const res: AxiosResponse<IBookSearchResponse> = await kakaoFetch.request<ISearchBookPayload>({
+    const res = await kakaoFetch.request<ISearchBookPayload, IBookSearchResponse>({
       endPoint: KAKAO_API_PATH.Book,
       method: Method.GET,
       payload: { query: keyword }

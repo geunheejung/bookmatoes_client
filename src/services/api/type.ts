@@ -13,5 +13,5 @@ export enum BookApiEndPoint {
 }
 
 export interface IBookApiPayload {
-  bookId: string;
+  url: string;
 };
