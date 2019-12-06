@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
+import { toast } from 'react-toastify';
 import _isString from 'lodash/isString';
 import _isEqual from 'lodash/isEqual';
 import { Method } from './type';
@@ -18,9 +19,15 @@ class Fetch {
     this.axiosIstance = axios.create(this.initConfig);
   }
 
-  public request = async <T, F>(params: IParams<T>) => {                          
-    const res: AxiosResponse<F> = await this.axiosIstance.request(this.getConfig(params));    
-    return res;
+  public request = async <T, F>(params: IParams<T>) => {    
+    try {
+      const res: AxiosResponse<F> = await this.axiosIstance.request(this.getConfig(params));    
+      return res;
+    } catch (e) {
+      toast('현재 서버에 문제가 있습니다.. 재시도 해주세요!');
+      throw e;
+    }                     
+    
   }
   
   private getConfig = (params: IParams<any>): AxiosRequestConfig => {

@@ -1,8 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { toast } from 'react-toastify';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
 import './reset.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure({
+  autoClose: 8000,
+  draggable: false,
+  position: toast.POSITION.TOP_CENTER,  
+});
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

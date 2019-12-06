@@ -38,16 +38,19 @@
   color: #666;
 }
 
-.detail-wrapper .info-wrapper .book-rating {  
-  position: relative;
-  display: flex;  
+.detail-wrapper .info-wrapper .book-rating {
+  /* text-align: center; */
+  display: grid;
   align-items: center;
-  justify-content: center;
+}
+
+.detail-wrapper .info-wrapper .book-rating .rating-list {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
 .detail-wrapper .info-wrapper .book-rating .show-rating-btn {  
-  position: absolute;
-  top: 80px;
+  margin: 0 auto;
   width: 60%;      
   border-radius: 7px;    
 }
