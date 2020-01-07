@@ -55,7 +55,8 @@
   border-radius: 7px;    
 }
 
-.detail-wrapper .info-wrapper .book-rating .show-rating-btn:hover {
+.detail-wrapper .info-wrapper .book-rating .show-rating-btn:hover,
+.detail-wrapper .info-wrapper .book-rating .show-rating-btn:disabled {
   width: 70%;
   padding: 14px;
   top: 70px;

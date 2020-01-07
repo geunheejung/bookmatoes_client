@@ -7,6 +7,7 @@ import {
   ISellerApiRequest,
   IRatingResponse
 } from './type';
+import {IBookSeller} from "../../reducers/book";
 
 export const bookSellers = (payload: IBookApiPayload) => {
   const { url } = payload;
@@ -19,13 +20,10 @@ export const bookSellers = (payload: IBookApiPayload) => {
   });
 };
 
-export const bookRating = (siteName: string, url: string) => bookFeatch.request<ISellerApiRequest, IRatingResponse>({
+export const bookRating = (seller: IBookSeller) => bookFeatch.request<ISellerApiRequest, IRatingResponse>({
   endPoint: BookApiEndPoint.RATING,
   method: Method.GET,
-  payload: {
-    siteName,
-    url
-  } 
+  payload: seller
 });
 
 export * from './type';

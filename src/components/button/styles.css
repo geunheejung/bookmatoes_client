@@ -15,3 +15,11 @@
   border: 2px solid #fff;
   color: #fff;  
 }
+
+.common-button.primry:disabled {  
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: #5383e8;
+  border: 2px solid #fff;
+  color: #fff;  
+}

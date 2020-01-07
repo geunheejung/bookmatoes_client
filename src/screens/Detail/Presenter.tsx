@@ -1,19 +1,35 @@
 import React from 'react';
+import usebook from '../../hooks/useBook';
+import _isEmpty from 'lodash/isEmpty';
 import { IBookDocument } from '../../services/api/kakao';
-import { SellerApiResponse } from '../../services/api';
 import { Button } from '../../components/button';
+import Spinner from '../../components/Spinner';
 import { joinArrToStr, dateFormat } from '../../services/helper/format';
-import Rating from '../../components/Rating/Rating';
+import Rating from '../../components/Rating/Container';
 import './styles.css';
+
+const RatingList: React.FC = () => {
+  const { seller } = usebook();
+
+  return (
+    <div className="rating-list">
+      {
+        seller.map((sellerInfo, index) => (
+          <Rating
+            key={`${sellerInfo.url}_${index}`}
+            sellerInfo={sellerInfo}
+          />
+        ))
+      }
+    </div>
+  );
+};
 
 interface IProps {
   bookDocument: IBookDocument;
-  bookSellerUrlList: SellerApiResponse;
-  showBookRating: () => void;
 }
 
 const Presenter: React.FC<IProps> = ({
-  bookSellerUrlList,
   bookDocument: {     
     thumbnail,
     title,
@@ -21,10 +37,20 @@ const Presenter: React.FC<IProps> = ({
     translators,
     publisher,
     datetime,
-    contents,    
+    contents,
+    url,
   },
-  showBookRating 
 }) => {
+  const { 
+    fetchSeller, 
+    isSellerSpinner,  
+    ratingList,  
+  } = usebook();
+
+  const onShowRating = () => fetchSeller(url);
+  const ratingListKeys = Object.keys(ratingList);
+  const isRatingSpinner = _isEmpty(ratingList) ? false : ratingListKeys.some(key => ratingList[key].isSpinner);
+
   return (    
     <div className="detail-wrapper">      
       <div className="thumbnail-wrapper">
@@ -47,20 +73,13 @@ const Presenter: React.FC<IProps> = ({
           {contents}
         </p>
         <div className="book-rating">
-          <div className="rating-list">
-            {
-              bookSellerUrlList.map(({ siteName, url }, index) => (
-                <Rating 
-                  key={`${url}_${index}`}
-                  siteName={siteName}
-                  url={url}
-                />
-              ))
-            }
-          </div>
+          <Spinner isLoading={isSellerSpinner}>
+            <RatingList />    
+          </Spinner>
           <Button 
             className="show-rating-btn"
-            onClick={showBookRating}
+            disabled={isSellerSpinner || isRatingSpinner}
+            onClick={onShowRating}
           >
             평점 보기
           </Button>          
